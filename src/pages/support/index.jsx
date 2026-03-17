@@ -22,7 +22,7 @@ export function ContactPage() {
   const channels = [
     { icon: Mail,      title: "Email Support",  val: "support@paydex.com",           sub: "Response within 2 hours" },
     { icon: PhoneCall, title: "Phone",          val: "+1 (800) 729-3390",             sub: "24/7 for Enterprise clients" },
-    { icon: MapPin,    title: "New York Office",   val: "450 Park Ave, New York, NY",        sub: "Mon–Fri 9am–6pm ET" },
+    { icon: MapPin,    title: "Iowa Office",   val: "100 Market St Unit 602, Des Moines, IA 50309",        sub: "Mon–Fri 9am–6pm ET" },
     { icon: Clock,     title: "Support Hours",  val: "24/7 Enterprise | 9am–6pm Business",sub: "ET (UTC−5)" },
   ];
 

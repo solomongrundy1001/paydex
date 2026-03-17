@@ -16,49 +16,48 @@ export function LeadershipPage() {
   const sub = dark ? "#99F6E4" : C.tealD;
 
   const team = [
-
     {
       name: "Michael Carter",
       role: "CEO & Co-Founder",
-      bio: "Former Stripe infrastructure lead. 18 years building global payment systems.",
-      init: "MC"
+      location: "New York, USA",
+      bio: "Leads product vision and global expansion. Background in building scalable payment infrastructure and cross-border systems.",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces"
     },
-
     {
       name: "Elena Kovacs",
       role: "CTO & Co-Founder",
-      bio: "Previously engineering director at Adyen. Expert in large-scale financial systems.",
-      init: "EK"
+      location: "Amsterdam, Netherlands",
+      bio: "Oversees platform architecture and engineering. متخصص in distributed systems and high-availability fintech infrastructure.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces"
     },
-
     {
       name: "Daniel Brooks",
       role: "Chief Financial Officer",
-      bio: "Former Morgan Stanley executive specializing in fintech growth and capital strategy.",
-      init: "DB"
+      location: "London, UK",
+      bio: "Drives financial strategy, compliance, and investor relations with a focus on sustainable fintech growth.",
+      image: "https://res.cloudinary.com/db2gycegs/image/upload/v1773742801/cfo_lupoij.jpg"
     },
-
     {
       name: "Sophie Laurent",
       role: "Chief Risk Officer",
-      bio: "Former EU payments regulator with 20 years in compliance and financial governance.",
-      init: "SL"
+      location: "Paris, France",
+      bio: "Leads risk, compliance, and regulatory strategy across multiple jurisdictions and payment ecosystems.",
+      image: "https://res.cloudinary.com/db2gycegs/image/upload/v1773742801/sophie_mvmvam.jpg"
     },
-
     {
-      name: "Lucas Schneider",
+      name: "Ritesh Kamath",
       role: "VP Engineering",
-      bio: "Ex-Google distributed systems engineer focused on scalable infrastructure.",
-      init: "LS"
+      location: "Berlin, Germany",
+      bio: "Builds and scales backend systems powering real-time global transactions and integrations.",
+      image: "https://res.cloudinary.com/db2gycegs/image/upload/v1773742801/director_f1qcta.jpg"
     },
-
     {
       name: "James Walker",
       role: "VP Global Sales",
-      bio: "15+ years leading enterprise fintech sales across North America and Europe.",
-      init: "JW"
+      location: "Toronto, Canada",
+      bio: "Leads enterprise partnerships and global sales strategy across North America and emerging markets.",
+      image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=400&h=400&fit=crop&crop=faces"
     }
-
   ];
 
   return (
@@ -106,9 +105,18 @@ export function LeadershipPage() {
                 color: "#fff",
                 fontWeight: 800,
                 fontSize: 20,
-                margin: "0 auto 18px"
+                margin: "0 auto 18px",
+                overflow:"hidden"
               }}>
-                {t.init}
+                {/* {t.init} */}
+                <img 
+                  src={t.image}
+                  onContextMenu={(e) => e.preventDefault()}
+                  alt={`image of ${t.name} - ${t.role}`} 
+                  width={'100%'} 
+                  height={'100%'} 
+                  style={{objectFit:"cover"}}
+                />
               </div>
 
               <h3 style={{
