@@ -54,16 +54,13 @@ export default function CareerModal({ career, onClose }) {
     <div
       onClick={onClose}
       style={{
-        position: "fixed",
-        inset: 0,
+        position: "fixed", 
+        inset: 0, 
         zIndex: 100,
-        background: "rgba(0,0,0,.72)",
+        background: "rgba(0,0,0,.72)", 
         backdropFilter: "blur(6px)",
-        display: "flex",
-        alignItems: mob ? "flex-end" : "flex-start",
-        justifyContent: "center",
-        padding: mob ? 0 : "40px 1.5rem",
         overflowY: "auto",
+        padding: mob ? 0 : "40px 1.5rem",
       }}
     >
       {/* Panel */}
@@ -71,9 +68,10 @@ export default function CareerModal({ career, onClose }) {
         onClick={(e) => e.stopPropagation()}
         style={{
           width: "100%",
-          maxWidth: 700,
+          maxWidth: mob ? "100%" : 700,
           background: dark ? "#031F1E" : "#fff",
           borderRadius: mob ? "20px 20px 0 0" : 20,
+          margin: mob ? "auto 0 0 0" : "0 auto", 
           minHeight: mob ? "92vh" : undefined,
           boxShadow: "0 32px 80px rgba(0,0,0,.45)",
           overflow: "hidden",
@@ -385,7 +383,7 @@ export default function CareerModal({ career, onClose }) {
                   color: "#F59E0B",
                 }}
               >
-                Could not open your email client
+                Could not open your email client?
               </p>
               <p
                 style={{
@@ -395,7 +393,7 @@ export default function CareerModal({ career, onClose }) {
                   lineHeight: 1.65,
                 }}
               >
-                Please send your application manually to{" "}
+                If your email client did not open, please send your application manually to{" "}
                 <a
                   href="mailto:careers@paydex.com"
                   style={{ color: C.teal, fontWeight: 600 }}
