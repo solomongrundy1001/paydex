@@ -3,150 +3,168 @@
 
   <!-- Core Pages -->
   <url>
-    <loc>https://paydex.com/</loc>
+    <loc>https://getpaydex.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/request-access</loc>
+    <loc>https://getpaydex.com/request-access</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/login</loc>
+    <loc>https://getpaydex.com/login</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Solutions -->
   <url>
-    <loc>https://paydex.com/solutions/mass-payouts</loc>
+    <loc>https://getpaydex.com/solutions/mass-payouts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/solutions/payroll-disbursement</loc>
+    <loc>https://getpaydex.com/solutions/payroll-disbursement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/solutions/vendor-payments</loc>
+    <loc>https://getpaydex.com/solutions/vendor-payments</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/solutions/invoice-payments</loc>
+    <loc>https://getpaydex.com/solutions/invoice-payments</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/solutions/contractor-payouts</loc>
+    <loc>https://getpaydex.com/solutions/receivables-suite</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://getpaydex.com/solutions/analytics-dashboard</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Who We Serve -->
   <url>
-    <loc>https://paydex.com/who-we-serve/enterprises</loc>
+    <loc>https://getpaydex.com/who-we-serve/enterprises</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/who-we-serve/marketplaces</loc>
+    <loc>https://getpaydex.com/who-we-serve/mid-size-businessess</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/who-we-serve/platforms</loc>
+    <loc>https://getpaydex.com/who-we-serve/financial-institutions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/who-we-serve/financial-institutions</loc>
+    <loc>https://getpaydex.com/who-we-serve/developer-portal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/who-we-serve/developers</loc>
+    <loc>https://getpaydex.com/who-we-serve/nonprofits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Platform -->
   <url>
-    <loc>https://paydex.com/global-rails</loc>
+    <loc>https://getpaydex.com/platform/global-rails</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/platform/api-integrations</loc>
+    <loc>https://getpaydex.com/platform/api-integrations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/platform/security-compliance</loc>
+    <loc>https://getpaydex.com/platform/security-compliance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/platform/fraud-prevention</loc>
+    <loc>https://getpaydex.com/platform/fraud-prevention</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/platform/real-time-processing</loc>
+    <loc>https://getpaydex.com/platform/real-time-processing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Company -->
   <url>
-    <loc>https://paydex.com/about</loc>
+    <loc>https://getpaydex.com/about/our-story</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/about/newsroom</loc>
+    <loc>https://getpaydex.com/about/newsroom</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/about/case-studies</loc>
+    <loc>https://getpaydex.com/about/case-studies</loc>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://getpaydex.com/about/careers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://getpaydex.com/about/leadership</loc>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Support -->
   <url>
-    <loc>https://paydex.com/support/contact</loc>
+    <loc>https://getpaydex.com/support/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/support/onboarding-guide</loc>
+    <loc>https://getpaydex.com/support/onboarding-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://paydex.com/support/system-status</loc>
+    <loc>https://getpaydex.com/support/system-status</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

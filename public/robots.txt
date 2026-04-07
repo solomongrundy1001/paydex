@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://paydex.com/sitemap.xml
+Sitemap: https://getpaydex.com/sitemap.xml
