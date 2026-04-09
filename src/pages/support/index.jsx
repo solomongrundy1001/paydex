@@ -19,6 +19,7 @@ import { PageHero, FAQBlock } from "../../components/block";
 // ─── Contact ──────────────────────────────────────────────────────────────────
 export function ContactPage() {
   const { dark } = useTheme();
+  const [show, setShow] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -42,15 +43,24 @@ export function ContactPage() {
     color: txt,
   };
   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
-  const channels = [
-    {
-      icon: Mail,
-      title: "Email Support",
-      val: "support@getpaydex.com",
-      sub: "Response within 2 hours",
-    },
-
+  const iconBox = {
+    width: 42,
+    height: 42,
+    borderRadius: 11,
+    flexShrink: 0,
+    background: `linear-gradient(135deg,${C.teal},${C.dark})`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+  };
+  const row = {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 16,
+    marginBottom: 24,
+  };
+  const addresses = [
     {
       icon: MapPin,
       title: "HQ Office — Geneva",
@@ -78,13 +88,6 @@ export function ContactPage() {
       val: "4601 Catalyst Ct, Omaha, NE 68106",
       sub: "Mon–Fri 9am–6pm CT · +1 (402) 810-5593",
     },
-
-    {
-      icon: Clock,
-      title: "Support Hours",
-      val: "24/7 Enterprise | 9am–6pm Business",
-      sub: "Coverage across ET / CT / CET",
-    },
   ];
 
   return (
@@ -107,59 +110,137 @@ export function ContactPage() {
             gap: 40,
           }}
         >
+          {/* ── LEFT COLUMN ── */}
           <div>
             <SectionLabel>Contact Channels</SectionLabel>
-            {channels.map((c) => (
-              <div
-                key={c.title}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 16,
-                  marginBottom: 24,
-                }}
-              >
-                <div
+
+            {/* Email */}
+            <div style={row}>
+              <div style={iconBox}>
+                <Mail size={18} />
+              </div>
+              <div>
+                <p
                   style={{
-                    width: 42,
-                    height: 42,
-                    borderRadius: 11,
-                    background: `linear-gradient(135deg,${C.teal},${C.dark})`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#fff",
-                    flexShrink: 0,
+                    margin: 0,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: txt,
                   }}
                 >
-                  <c.icon size={18} />
-                </div>
-                <div>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontWeight: 700,
-                      fontSize: 14,
-                      color: txt,
-                    }}
-                  >
-                    {c.title}
-                  </p>
-                  <p
-                    style={{
-                      margin: "2px 0",
-                      fontSize: 14,
-                      color: C.teal,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {c.val}
-                  </p>
-                  <p style={{ margin: 0, fontSize: 12, color: sub }}>{c.sub}</p>
-                </div>
+                  Email Support
+                </p>
+                <p
+                  style={{
+                    margin: "2px 0",
+                    fontSize: 14,
+                    color: C.teal,
+                    fontWeight: 600,
+                  }}
+                >
+                  support@getpaydex.com
+                </p>
+                <p style={{ margin: 0, fontSize: 12, color: sub }}>
+                  Response within 2 hours
+                </p>
               </div>
-            ))}
+            </div>
+
+            <div
+              onClick={() => setShow((prev) => !prev)}
+              style={{
+                cursor: "pointer",
+                fontWeight: 600,
+                fontSize: 14,
+                color:dark? '#fff' : "#000",
+                marginBottom: 24,
+                marginLeft: 30,
+                background: dark ? "rgba(13,148,136,.07)" : "#99F6E4",
+                border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
+                borderRadius: 15,
+                padding: "1rem",
+                maxWidth: 200,
+                textAlign: "center"
+              }}
+            
+            >
+              {show ? "Collapse Offices" : "View Offices"}
+            </div>
+
+            {/* office address */}
+            {show && (
+              <div>
+                {addresses.map((address) => {
+                  const AddrIcon = address.icon;
+                  return (
+                    <div key={address.title} style={row}>
+                      <div style={iconBox}>
+                        <AddrIcon size={18} />
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontWeight: 700,
+                            fontSize: 14,
+                            color: txt,
+                          }}
+                        >
+                          {address.title}
+                        </p>
+                        <p
+                          style={{
+                            margin: "2px 0",
+                            fontSize: 14,
+                            color: C.teal,
+                            fontWeight: 600,
+                          }}
+                        >
+                          {address.val}
+                        </p>
+                        <p style={{ margin: 0, fontSize: 12, color: sub }}>
+                          {address.sub}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* support hours */}
+            <div style={row}>
+              <div style={iconBox}>
+                <Clock size={18} />
+              </div>
+              <div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: txt,
+                  }}
+                >
+                  Support Hours
+                </p>
+                <p
+                  style={{
+                    margin: "2px 0",
+                    fontSize: 14,
+                    color: C.teal,
+                    fontWeight: 600,
+                  }}
+                >
+                  24/7 Enterprise | 9am–6pm Business
+                </p>
+                <p style={{ margin: 0, fontSize: 12, color: sub }}>
+                  Coverage across ET / CT / CET
+                </p>
+              </div>
+            </div>
           </div>
+          {/* ── RIGHT COLUMN — contact form ── */}
           {sent ? (
             <div
               style={{
@@ -275,11 +356,13 @@ export function ContactPage() {
               </button>
             </div>
           )}
-        </div>
+        </div>{" "}
+        {/* end grid */}
       </Section>
     </Layout>
   );
 }
+
 
 // ─── Help Center ─────────────────────────────────────────────────────────────
 export function HelpCenterPage() {
