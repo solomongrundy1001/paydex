@@ -146,7 +146,39 @@ export function ContactPage() {
               </div>
             </div>
 
-            <div
+            {/* support hours */}
+            <div style={row}>
+              <div style={iconBox}>
+                <Clock size={18} />
+              </div>
+              <div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: txt,
+                  }}
+                >
+                  Support Hours
+                </p>
+                <p
+                  style={{
+                    margin: "2px 0",
+                    fontSize: 14,
+                    color: C.teal,
+                    fontWeight: 600,
+                  }}
+                >
+                  24/7 Enterprise | 9am–6pm Business
+                </p>
+                <p style={{ margin: 0, fontSize: 12, color: sub }}>
+                  Coverage across ET / CT / CET
+                </p>
+              </div>
+            </div>
+            {/* office trigger button */}
+          <div
               onClick={() => setShow((prev) => !prev)}
               style={{
                 cursor: "pointer",
@@ -207,39 +239,8 @@ export function ContactPage() {
                 })}
               </div>
             )}
-
-            {/* support hours */}
-            <div style={row}>
-              <div style={iconBox}>
-                <Clock size={18} />
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontWeight: 700,
-                    fontSize: 14,
-                    color: txt,
-                  }}
-                >
-                  Support Hours
-                </p>
-                <p
-                  style={{
-                    margin: "2px 0",
-                    fontSize: 14,
-                    color: C.teal,
-                    fontWeight: 600,
-                  }}
-                >
-                  24/7 Enterprise | 9am–6pm Business
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: sub }}>
-                  Coverage across ET / CT / CET
-                </p>
-              </div>
-            </div>
           </div>
+          
           {/* ── RIGHT COLUMN — contact form ── */}
           {sent ? (
             <div
