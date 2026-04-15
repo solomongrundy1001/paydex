@@ -65,28 +65,28 @@ export function ContactPage() {
       icon: MapPin,
       title: "HQ Office — Geneva",
       val: "1, Place des Alpes, 1201 Geneva, Switzerland",
-      sub: "Mon–Fri 9am–6pm CET/CEST · +41 22 510 92 00",
+      sub: "Mon–Fri 9am–6pm CET/CEST",
     },
 
     {
       icon: MapPin,
       title: "Iowa Office — Des Moines",
       val: "100 Market St Unit 602, Des Moines, IA 50309",
-      sub: "Mon–Fri 9am–6pm CT · +1 (515) 305-4021",
+      sub: "Mon–Fri 9am–6pm CT • +1 (515) 379-5872",
     },
 
     {
       icon: MapPin,
       title: "New York Office",
       val: "W 38th St, New York, NY 10018",
-      sub: "Mon–Fri 9am–6pm ET · +1 (212) 970-8472",
+      sub: "Mon–Fri 9am–6pm ET • +1 (917) 936-5683",
     },
 
     {
       icon: MapPin,
       title: "Nebraska Office — Omaha",
       val: "4601 Catalyst Ct, Omaha, NE 68106",
-      sub: "Mon–Fri 9am–6pm CT · +1 (402) 810-5593",
+      sub: "Mon–Fri 9am–6pm CT  • +1 (402) 433-0872",
     },
   ];
 
