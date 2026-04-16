@@ -1,9 +1,8 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   CheckCircle2,
-  AlertCircle,
   Mail,
-  PhoneCall,
   MapPin,
   Clock,
   Activity,
@@ -15,17 +14,61 @@ import { useWindowWidth } from "../../hooks";
 import { Layout } from "../../components/layout";
 import { PageSEO, SectionLabel, Section, CTABanner } from "../../components/ui";
 import { PageHero, FAQBlock } from "../../components/block";
+import { toast } from 'sonner';
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
 export function ContactPage() {
   const { dark } = useTheme();
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    if (!form.name || !form.email || !form.message) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+    setIsLoading(true)
+
+    emailjs
+      .send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          reply_to: form.email,
+          subject: form.subject,
+          message: form.message,
+        },
+        import.meta.env.VITE_PUBLIC_KEY,
+      )
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          setSent(true);
+          setIsLoading(false)
+          setForm({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.log("FAILED...", error);
+          setIsLoading(false)
+          toast.error("failed to submit, try again later")
+        },
+      );
+  };
+
   const [sent, setSent] = useState(false);
   const w = useWindowWidth();
   const mob = w < 640;
@@ -178,13 +221,13 @@ export function ContactPage() {
               </div>
             </div>
             {/* office trigger button */}
-          <div
+            <div
               onClick={() => setShow((prev) => !prev)}
               style={{
                 cursor: "pointer",
                 fontWeight: 600,
                 fontSize: 14,
-                color:dark? '#fff' : "#000",
+                color: dark ? "#fff" : "#000",
                 marginBottom: 24,
                 marginLeft: 30,
                 background: dark ? "rgba(13,148,136,.07)" : "#99F6E4",
@@ -192,9 +235,8 @@ export function ContactPage() {
                 borderRadius: 15,
                 padding: "1rem",
                 maxWidth: 200,
-                textAlign: "center"
+                textAlign: "center",
               }}
-            
             >
               {show ? "Collapse Offices" : "View Offices"}
             </div>
@@ -240,7 +282,7 @@ export function ContactPage() {
               </div>
             )}
           </div>
-          
+
           {/* ── RIGHT COLUMN — contact form ── */}
           {sent ? (
             <div
@@ -281,22 +323,44 @@ export function ContactPage() {
                 border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
               }}
             >
-              <h3
-                style={{
-                  fontWeight: 800,
-                  fontSize: 20,
-                  color: txt,
-                  marginBottom: 20,
-                }}
-              >
-                Send a Message
-              </h3>
-              {[
-                ["name", "Name", "text", "Your name"],
-                ["email", "Email", "email", "you@company.com"],
-                ["subject", "Subject", "text", "How can we help?"],
-              ].map(([k, l, t, ph]) => (
-                <div key={k} style={{ marginBottom: 14 }}>
+              <form onSubmit={sendEmail}>
+                <h3
+                  style={{
+                    fontWeight: 800,
+                    fontSize: 20,
+                    color: txt,
+                    marginBottom: 20,
+                  }}
+                >
+                  Send a Message
+                </h3>
+                {[
+                  ["name", "Name", "text", "Your name"],
+                  ["email", "Email", "email", "you@company.com"],
+                  ["subject", "Subject", "text", "How can we help?"],
+                ].map(([k, l, t, ph]) => (
+                  <div key={k} style={{ marginBottom: 14 }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: sub,
+                        marginBottom: 5,
+                      }}
+                    >
+                      {l}
+                    </label>
+                    <input
+                      value={form[k]}
+                      onChange={update(k)}
+                      placeholder={ph}
+                      type={t}
+                      style={inpStyle}
+                    />
+                  </div>
+                ))}
+                <div style={{ marginBottom: 20 }}>
                   <label
                     style={{
                       display: "block",
@@ -306,55 +370,33 @@ export function ContactPage() {
                       marginBottom: 5,
                     }}
                   >
-                    {l}
+                    Message
                   </label>
-                  <input
-                    value={form[k]}
-                    onChange={update(k)}
-                    placeholder={ph}
-                    type={t}
-                    style={inpStyle}
+                  <textarea
+                    value={form.message}
+                    onChange={update("message")}
+                    rows={4}
+                    placeholder="Describe your issue..."
+                    style={{ ...inpStyle, resize: "vertical" }}
                   />
                 </div>
-              ))}
-              <div style={{ marginBottom: 20 }}>
-                <label
+                <button
+                  type="submit"
                   style={{
-                    display: "block",
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: sub,
-                    marginBottom: 5,
+                    width: "100%",
+                    padding: "13px",
+                    borderRadius: 11,
+                    background: `linear-gradient(135deg,${C.teal},${C.dark})`,
+                    color: "#fff",
+                    fontWeight: 700,
+                    fontSize: 15,
+                    border: "none",
+                    cursor: "pointer",
                   }}
                 >
-                  Message
-                </label>
-                <textarea
-                  value={form.message}
-                  onChange={update("message")}
-                  rows={4}
-                  placeholder="Describe your issue..."
-                  style={{ ...inpStyle, resize: "vertical" }}
-                />
-              </div>
-              <button
-                onClick={() => {
-                  if (form.name && form.email) setSent(true);
-                }}
-                style={{
-                  width: "100%",
-                  padding: "13px",
-                  borderRadius: 11,
-                  background: `linear-gradient(135deg,${C.teal},${C.dark})`,
-                  color: "#fff",
-                  fontWeight: 700,
-                  fontSize: 15,
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                Send Message
-              </button>
+                  {isLoading? "Sending...": "Send Message"}
+                </button>
+              </form>
             </div>
           )}
         </div>{" "}
@@ -363,7 +405,6 @@ export function ContactPage() {
     </Layout>
   );
 }
-
 
 // ─── Help Center ─────────────────────────────────────────────────────────────
 export function HelpCenterPage() {
