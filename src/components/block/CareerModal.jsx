@@ -395,10 +395,10 @@ export default function CareerModal({ career, onClose }) {
               >
                 If your email client did not open, please send your application manually to{" "}
                 <a
-                  href="mailto:careers@paydex.com"
+                  href="mailto:careers@getpaydex.com"
                   style={{ color: C.teal, fontWeight: 600 }}
                 >
-                  careers@paydex.com
+                  careers@getpaydex.com
                 </a>{" "}
                 with the subject line{" "}
                 <strong>"{career.title} Application"</strong>
@@ -419,7 +419,7 @@ export default function CareerModal({ career, onClose }) {
             }}
           >
             <a
-              href={`mailto:careers@paydex.com?subject=${encodeURIComponent(career.title + " Application")}`}
+              href={`mailto:careers@getpaydex.com?subject=${encodeURIComponent(career.title + " Application")}`}
               onClick={handleApply}
               style={{
                 display: "inline-flex",

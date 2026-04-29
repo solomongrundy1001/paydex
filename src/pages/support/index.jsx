@@ -121,7 +121,7 @@ export function ContactPage() {
     {
       icon: MapPin,
       title: "New York Office",
-      val: "W 38th St, New York, NY 10018",
+      val: "330 W 38th St, New York, NY 10018",
       sub: "Mon–Fri 9am–6pm ET • +1 (917) 936-5683",
     },
 
@@ -181,7 +181,7 @@ export function ContactPage() {
                     fontWeight: 600,
                   }}
                 >
-                  support@getpaydex.com
+                  contact@getpaydex.com
                 </p>
                 <p style={{ margin: 0, fontSize: 12, color: sub }}>
                   Response within 2 hours
