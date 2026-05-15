@@ -15,123 +15,426 @@ import { Layout } from "../../components/layout";
 import { PageSEO, SectionLabel, Section, CTABanner } from "../../components/ui";
 import { PageHero, FAQBlock } from "../../components/block";
 import { toast } from 'sonner';
+import { useContactConfig } from "../../hooks/useContactConfig";
+
+
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
+// export function ContactPage() {
+//   const { dark } = useTheme();
+//   const [show, setShow] = useState(false);
+//   const { data, loading, error } = useContactConfig();
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [form, setForm] = useState({
+//     name: "",
+//     email: "",
+//     subject: "",
+//     message: "",
+//   });
+
+//   const sendEmail = (e) => {
+//     e.preventDefault();
+
+//     if (!form.name || !form.email || !form.message) {
+//       toast.error("Please fill all required fields");
+//       return;
+//     }
+//     setIsLoading(true)
+
+//     emailjs
+//       .send(
+//         import.meta.env.VITE_SERVICE_ID,
+//         import.meta.env.VITE_TEMPLATE_ID,
+//         {
+//           from_name: form.name,
+//           reply_to: form.email,
+//           subject: form.subject,
+//           message: form.message,
+//         },
+//         import.meta.env.VITE_PUBLIC_KEY,
+//       )
+//       .then(
+//         () => {
+//           console.log("SUCCESS!");
+//           setSent(true);
+//           setIsLoading(false)
+//           setForm({
+//             name: "",
+//             email: "",
+//             subject: "",
+//             message: "",
+//           });
+//         },
+//         (error) => {
+//           console.log("FAILED...", error);
+//           setIsLoading(false)
+//           toast.error("failed to submit, try again later")
+//         },
+//       );
+//   };
+
+//   const [sent, setSent] = useState(false);
+//   const w = useWindowWidth();
+//   const mob = w < 640;
+//   const txt = dark ? C.white : C.black;
+//   const sub = dark ? "#99F6E4" : C.tealD;
+//   const inpStyle = {
+//     width: "100%",
+//     padding: "11px 14px",
+//     borderRadius: 10,
+//     fontSize: 14,
+//     outline: "none",
+//     boxSizing: "border-box",
+//     background: dark ? "#031F1E" : C.white,
+//     border: `1px solid ${dark ? "#0F766E" : "#CCFBF1"}`,
+//     color: txt,
+//   };
+//   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+//   const iconBox = {
+//     width: 42,
+//     height: 42,
+//     borderRadius: 11,
+//     flexShrink: 0,
+//     background: `linear-gradient(135deg,${C.teal},${C.dark})`,
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     color: "#fff",
+//   };
+//   const row = {
+//     display: "flex",
+//     alignItems: "flex-start",
+//     gap: 16,
+//     marginBottom: 24,
+//   };
+//   const addresses = [
+//     {
+//       icon: MapPin,
+//       title: "HQ Office — Geneva",
+//       val: "1, Place des Alpes, 1201 Geneva, Switzerland",
+//       sub: "Mon–Fri 9am–6pm CET/CEST",
+//     },
+
+//     {
+//       icon: MapPin,
+//       title: "Iowa Office — Des Moines",
+//       val: "100 Market St Unit 602, Des Moines, IA 50309",
+//       sub: "Mon–Fri 9am–6pm CT • +1 (515) 379-5872",
+//     },
+
+//     {
+//       icon: MapPin,
+//       title: "New York Office",
+//       val: "330 W 38th St, New York, NY 10018",
+//       sub: "Mon–Fri 9am–6pm ET • +1 (917) 936-5683",
+//     },
+
+//     {
+//       icon: MapPin,
+//       title: "Nebraska Office — Omaha",
+//       val: "4601 Catalyst Ct, Omaha, NE 68106",
+//       sub: "Mon–Fri 9am–6pm CT  • +1 (402) 433-0872",
+//     },
+//   ];
+
+//   return (
+//     <Layout>
+//       <PageSEO
+//         title="Contact Support"
+//         description="Get in touch with Paydex's support team. Available 24/7 for enterprise clients."
+//         keywords="Paydex contact, payment platform support, fintech support"
+//       />
+//       <PageHero
+//         tag="SUPPORT"
+//         title="We're Here to Help"
+//         subtitle="Enterprise support available 24/7. Typical response time under 2 hours."
+//       />
+//       <Section style={{ background: dark ? "#031F1E" : "#F0FDFA" }}>
+//         <div
+//           style={{
+//             display: "grid",
+//             gridTemplateColumns: mob ? "1fr" : "1fr 1fr",
+//             gap: 40,
+//           }}
+//         >
+//           {/* ── LEFT COLUMN ── */}
+//           <div>
+//             <SectionLabel>Contact Channels</SectionLabel>
+
+//             {/* Email */}
+//             <div style={row}>
+//               <div style={iconBox}>
+//                 <Mail size={18} />
+//               </div>
+//               <div>
+//                 <p
+//                   style={{
+//                     margin: 0,
+//                     fontWeight: 700,
+//                     fontSize: 14,
+//                     color: txt,
+//                   }}
+//                 >
+//                   Email Support
+//                 </p>
+//                 <p
+//                   style={{
+//                     margin: "2px 0",
+//                     fontSize: 14,
+//                     color: C.teal,
+//                     fontWeight: 600,
+//                   }}
+//                 >
+//                   contact@getpaydex.com
+//                 </p>
+//                 <p style={{ margin: 0, fontSize: 12, color: sub }}>
+//                   Response within 2 hours
+//                 </p>
+//               </div>
+//             </div>
+
+//             {/* support hours */}
+//             <div style={row}>
+//               <div style={iconBox}>
+//                 <Clock size={18} />
+//               </div>
+//               <div>
+//                 <p
+//                   style={{
+//                     margin: 0,
+//                     fontWeight: 700,
+//                     fontSize: 14,
+//                     color: txt,
+//                   }}
+//                 >
+//                   Support Hours
+//                 </p>
+//                 <p
+//                   style={{
+//                     margin: "2px 0",
+//                     fontSize: 14,
+//                     color: C.teal,
+//                     fontWeight: 600,
+//                   }}
+//                 >
+//                   24/7 Enterprise | 9am–6pm Business
+//                 </p>
+//                 <p style={{ margin: 0, fontSize: 12, color: sub }}>
+//                   Coverage across ET / CT / CET
+//                 </p>
+//               </div>
+//             </div>
+//             {/* office trigger button */}
+//             <div
+//               onClick={() => setShow((prev) => !prev)}
+//               style={{
+//                 cursor: "pointer",
+//                 fontWeight: 600,
+//                 fontSize: 14,
+//                 color: dark ? "#fff" : "#000",
+//                 marginBottom: 24,
+//                 marginLeft: 30,
+//                 background: dark ? "rgba(13,148,136,.07)" : "#99F6E4",
+//                 border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
+//                 borderRadius: 15,
+//                 padding: "1rem",
+//                 maxWidth: 200,
+//                 textAlign: "center",
+//               }}
+//             >
+//               {show ? "Collapse Offices" : "View Offices"}
+//             </div>
+
+//             {/* office address */}
+//             {show && (
+//               <div>
+//                 {addresses.map((address) => {
+//                   const AddrIcon = address.icon;
+//                   return (
+//                     <div key={address.title} style={row}>
+//                       <div style={iconBox}>
+//                         <AddrIcon size={18} />
+//                       </div>
+//                       <div>
+//                         <p
+//                           style={{
+//                             margin: 0,
+//                             fontWeight: 700,
+//                             fontSize: 14,
+//                             color: txt,
+//                           }}
+//                         >
+//                           {address.title}
+//                         </p>
+//                         <p
+//                           style={{
+//                             margin: "2px 0",
+//                             fontSize: 14,
+//                             color: C.teal,
+//                             fontWeight: 600,
+//                           }}
+//                         >
+//                           {address.val}
+//                         </p>
+//                         <p style={{ margin: 0, fontSize: 12, color: sub }}>
+//                           {address.sub}
+//                         </p>
+//                       </div>
+//                     </div>
+//                   );
+//                 })}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* ── RIGHT COLUMN — contact form ── */}
+//           {sent ? (
+//             <div
+//               style={{
+//                 display: "flex",
+//                 flexDirection: "column",
+//                 alignItems: "center",
+//                 justifyContent: "center",
+//                 textAlign: "center",
+//                 padding: "2rem",
+//               }}
+//             >
+//               <CheckCircle2
+//                 size={52}
+//                 style={{ color: C.teal, marginBottom: 16 }}
+//               />
+//               <h3
+//                 style={{
+//                   fontWeight: 800,
+//                   fontSize: 22,
+//                   color: txt,
+//                   marginBottom: 10,
+//                 }}
+//               >
+//                 Message Sent!
+//               </h3>
+//               <p style={{ color: sub, fontSize: 15, lineHeight: 1.7 }}>
+//                 Our team will respond within 2 hours. For urgent issues call our
+//                 24/7 line.
+//               </p>
+//             </div>
+//           ) : (
+//             <div
+//               style={{
+//                 background: dark ? "rgba(13,148,136,.07)" : "#fff",
+//                 padding: "2rem",
+//                 borderRadius: 18,
+//                 border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
+//               }}
+//             >
+//               <form onSubmit={sendEmail}>
+//                 <h3
+//                   style={{
+//                     fontWeight: 800,
+//                     fontSize: 20,
+//                     color: txt,
+//                     marginBottom: 20,
+//                   }}
+//                 >
+//                   Send a Message
+//                 </h3>
+//                 {[
+//                   ["name", "Name", "text", "Your name"],
+//                   ["email", "Email", "email", "you@company.com"],
+//                   ["subject", "Subject", "text", "How can we help?"],
+//                 ].map(([k, l, t, ph]) => (
+//                   <div key={k} style={{ marginBottom: 14 }}>
+//                     <label
+//                       style={{
+//                         display: "block",
+//                         fontSize: 12,
+//                         fontWeight: 600,
+//                         color: sub,
+//                         marginBottom: 5,
+//                       }}
+//                     >
+//                       {l}
+//                     </label>
+//                     <input
+//                       value={form[k]}
+//                       onChange={update(k)}
+//                       placeholder={ph}
+//                       type={t}
+//                       style={inpStyle}
+//                     />
+//                   </div>
+//                 ))}
+//                 <div style={{ marginBottom: 20 }}>
+//                   <label
+//                     style={{
+//                       display: "block",
+//                       fontSize: 12,
+//                       fontWeight: 600,
+//                       color: sub,
+//                       marginBottom: 5,
+//                     }}
+//                   >
+//                     Message
+//                   </label>
+//                   <textarea
+//                     value={form.message}
+//                     onChange={update("message")}
+//                     rows={4}
+//                     placeholder="Describe your issue..."
+//                     style={{ ...inpStyle, resize: "vertical" }}
+//                   />
+//                 </div>
+//                 <button
+//                   type="submit"
+//                   style={{
+//                     width: "100%",
+//                     padding: "13px",
+//                     borderRadius: 11,
+//                     background: `linear-gradient(135deg,${C.teal},${C.dark})`,
+//                     color: "#fff",
+//                     fontWeight: 700,
+//                     fontSize: 15,
+//                     border: "none",
+//                     cursor: "pointer",
+//                   }}
+//                 >
+//                   {isLoading? "Sending...": "Send Message"}
+//                 </button>
+//               </form>
+//             </div>
+//           )}
+//         </div>{" "}
+//         {/* end grid */}
+//       </Section>
+//     </Layout>
+//   );
+// }
 export function ContactPage() {
   const { dark } = useTheme();
-  const [show, setShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill all required fields");
-      return;
-    }
-    setIsLoading(true)
-
-    emailjs
-      .send(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          reply_to: form.email,
-          subject: form.subject,
-          message: form.message,
-        },
-        import.meta.env.VITE_PUBLIC_KEY,
-      )
-      .then(
-        () => {
-          console.log("SUCCESS!");
-          setSent(true);
-          setIsLoading(false)
-          setForm({
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
-        },
-        (error) => {
-          console.log("FAILED...", error);
-          setIsLoading(false)
-          toast.error("failed to submit, try again later")
-        },
-      );
-  };
-
-  const [sent, setSent] = useState(false);
-  const w = useWindowWidth();
+  const { data, loading, error } = useContactConfig();
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [sent, setSent]   = useState(false);
+  const [showOffices, setShowOffices] = useState(false);
+  const w   = useWindowWidth();
   const mob = w < 640;
   const txt = dark ? C.white : C.black;
   const sub = dark ? "#99F6E4" : C.tealD;
+
   const inpStyle = {
-    width: "100%",
-    padding: "11px 14px",
-    borderRadius: 10,
-    fontSize: 14,
-    outline: "none",
-    boxSizing: "border-box",
+    width: "100%", padding: "11px 14px", borderRadius: 10, fontSize: 14,
+    outline: "none", boxSizing: "border-box",
     background: dark ? "#031F1E" : C.white,
     border: `1px solid ${dark ? "#0F766E" : "#CCFBF1"}`,
     color: txt,
   };
-  const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  const update = k => e => setForm({ ...form, [k]: e.target.value });
+
   const iconBox = {
-    width: 42,
-    height: 42,
-    borderRadius: 11,
-    flexShrink: 0,
+    width: 42, height: 42, borderRadius: 11, flexShrink: 0,
     background: `linear-gradient(135deg,${C.teal},${C.dark})`,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#fff",
+    display: "flex", alignItems: "center", justifyContent: "center", color: "#fff",
   };
-  const row = {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: 16,
-    marginBottom: 24,
-  };
-  const addresses = [
-    {
-      icon: MapPin,
-      title: "HQ Office — Geneva",
-      val: "1, Place des Alpes, 1201 Geneva, Switzerland",
-      sub: "Mon–Fri 9am–6pm CET/CEST",
-    },
-
-    {
-      icon: MapPin,
-      title: "Iowa Office — Des Moines",
-      val: "100 Market St Unit 602, Des Moines, IA 50309",
-      sub: "Mon–Fri 9am–6pm CT • +1 (515) 379-5872",
-    },
-
-    {
-      icon: MapPin,
-      title: "New York Office",
-      val: "330 W 38th St, New York, NY 10018",
-      sub: "Mon–Fri 9am–6pm ET • +1 (917) 936-5683",
-    },
-
-    {
-      icon: MapPin,
-      title: "Nebraska Office — Omaha",
-      val: "4601 Catalyst Ct, Omaha, NE 68106",
-      sub: "Mon–Fri 9am–6pm CT  • +1 (402) 433-0872",
-    },
-  ];
+  const row = { display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 24 };
 
   return (
     <Layout>
@@ -145,267 +448,99 @@ export function ContactPage() {
         title="We're Here to Help"
         subtitle="Enterprise support available 24/7. Typical response time under 2 hours."
       />
+
       <Section style={{ background: dark ? "#031F1E" : "#F0FDFA" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: mob ? "1fr" : "1fr 1fr",
-            gap: 40,
-          }}
-        >
+        <div style={{ display: "grid", gridTemplateColumns: mob ? "1fr" : "1fr 1fr", gap: 40 }}>
+
           {/* ── LEFT COLUMN ── */}
           <div>
             <SectionLabel>Contact Channels</SectionLabel>
 
-            {/* Email */}
-            <div style={row}>
-              <div style={iconBox}>
-                <Mail size={18} />
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontWeight: 700,
-                    fontSize: 14,
-                    color: txt,
-                  }}
-                >
-                  Email Support
-                </p>
-                <p
-                  style={{
-                    margin: "2px 0",
-                    fontSize: 14,
-                    color: C.teal,
-                    fontWeight: 600,
-                  }}
-                >
-                  contact@getpaydex.com
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: sub }}>
-                  Response within 2 hours
-                </p>
-              </div>
-            </div>
+            {/* Loading / error states */}
+            {loading && (
+              <p style={{ color: sub, fontSize: 14 }}>Loading contact info…</p>
+            )}
+            {error && (
+              <p style={{ color: "#F87171", fontSize: 14 }}>
+                Could not load contact info. Please try again later.
+              </p>
+            )}
 
-            {/* support hours */}
-            <div style={row}>
-              <div style={iconBox}>
-                <Clock size={18} />
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontWeight: 700,
-                    fontSize: 14,
-                    color: txt,
-                  }}
-                >
-                  Support Hours
-                </p>
-                <p
-                  style={{
-                    margin: "2px 0",
-                    fontSize: 14,
-                    color: C.teal,
-                    fontWeight: 600,
-                  }}
-                >
-                  24/7 Enterprise | 9am–6pm Business
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: sub }}>
-                  Coverage across ET / CT / CET
-                </p>
-              </div>
-            </div>
-            {/* office trigger button */}
-            <div
-              onClick={() => setShow((prev) => !prev)}
-              style={{
-                cursor: "pointer",
-                fontWeight: 600,
-                fontSize: 14,
-                color: dark ? "#fff" : "#000",
-                marginBottom: 24,
-                marginLeft: 30,
-                background: dark ? "rgba(13,148,136,.07)" : "#99F6E4",
-                border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
-                borderRadius: 15,
-                padding: "1rem",
-                maxWidth: 200,
-                textAlign: "center",
-              }}
-            >
-              {show ? "Collapse Offices" : "View Offices"}
-            </div>
+            {/* Channels — Email, Phone, Hours etc */}
+            {data?.channels?.map(c => {
+              const ChanIcon = ICON_MAP[c.icon] ?? MapPin;
+              return (
+                <div key={c.title} style={row}>
+                  <div style={iconBox}><ChanIcon size={18} /></div>
+                  <div>
+                    <p style={{ margin: 0, fontWeight: 700, fontSize: 14, color: txt }}>{c.title}</p>
+                    <p style={{ margin: "2px 0", fontSize: 14, color: C.teal, fontWeight: 600 }}>{c.val}</p>
+                    <p style={{ margin: 0, fontSize: 12, color: sub }}>{c.sub}</p>
+                  </div>
+                </div>
+              );
+            })}
 
-            {/* office address */}
-            {show && (
-              <div>
-                {addresses.map((address) => {
-                  const AddrIcon = address.icon;
-                  return (
-                    <div key={address.title} style={row}>
-                      <div style={iconBox}>
-                        <AddrIcon size={18} />
-                      </div>
-                      <div>
-                        <p
-                          style={{
-                            margin: 0,
-                            fontWeight: 700,
-                            fontSize: 14,
-                            color: txt,
-                          }}
-                        >
-                          {address.title}
-                        </p>
-                        <p
-                          style={{
-                            margin: "2px 0",
-                            fontSize: 14,
-                            color: C.teal,
-                            fontWeight: 600,
-                          }}
-                        >
-                          {address.val}
-                        </p>
-                        <p style={{ margin: 0, fontSize: 12, color: sub }}>
-                          {address.sub}
-                        </p>
-                      </div>
+            {/* Offices — collapsible */}
+            {data?.offices?.length > 0 && (
+              <>
+                <button
+                  onClick={() => setShowOffices(prev => !prev)}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: C.teal, fontWeight: 600, fontSize: 14, padding: "4px 0", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 }}
+                >
+                  <MapPin size={15} />
+                  {showOffices ? "Hide Offices ▲" : "Our Offices ▼"}
+                </button>
+
+                {showOffices && data.offices.map(office => (
+                  <div key={office.title} style={row}>
+                    <div style={iconBox}><MapPin size={18} /></div>
+                    <div>
+                      <p style={{ margin: 0, fontWeight: 700, fontSize: 14, color: txt }}>{office.title}</p>
+                      <p style={{ margin: "2px 0", fontSize: 14, color: C.teal, fontWeight: 600 }}>{office.val}</p>
+                      <p style={{ margin: 0, fontSize: 12, color: sub }}>{office.sub}</p>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                ))}
+              </>
             )}
           </div>
 
-          {/* ── RIGHT COLUMN — contact form ── */}
+          {/* ── RIGHT COLUMN — form ── */}
           {sent ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                padding: "2rem",
-              }}
-            >
-              <CheckCircle2
-                size={52}
-                style={{ color: C.teal, marginBottom: 16 }}
-              />
-              <h3
-                style={{
-                  fontWeight: 800,
-                  fontSize: 22,
-                  color: txt,
-                  marginBottom: 10,
-                }}
-              >
-                Message Sent!
-              </h3>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "2rem" }}>
+              <CheckCircle2 size={52} style={{ color: C.teal, marginBottom: 16 }} />
+              <h3 style={{ fontWeight: 800, fontSize: 22, color: txt, marginBottom: 10 }}>Message Sent!</h3>
               <p style={{ color: sub, fontSize: 15, lineHeight: 1.7 }}>
-                Our team will respond within 2 hours. For urgent issues call our
-                24/7 line.
+                Our team will respond within 2 hours. For urgent issues call our 24/7 line.
               </p>
             </div>
           ) : (
-            <div
-              style={{
-                background: dark ? "rgba(13,148,136,.07)" : "#fff",
-                padding: "2rem",
-                borderRadius: 18,
-                border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}`,
-              }}
-            >
-              <form onSubmit={sendEmail}>
-                <h3
-                  style={{
-                    fontWeight: 800,
-                    fontSize: 20,
-                    color: txt,
-                    marginBottom: 20,
-                  }}
-                >
-                  Send a Message
-                </h3>
-                {[
-                  ["name", "Name", "text", "Your name"],
-                  ["email", "Email", "email", "you@company.com"],
-                  ["subject", "Subject", "text", "How can we help?"],
-                ].map(([k, l, t, ph]) => (
-                  <div key={k} style={{ marginBottom: 14 }}>
-                    <label
-                      style={{
-                        display: "block",
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: sub,
-                        marginBottom: 5,
-                      }}
-                    >
-                      {l}
-                    </label>
-                    <input
-                      value={form[k]}
-                      onChange={update(k)}
-                      placeholder={ph}
-                      type={t}
-                      style={inpStyle}
-                    />
-                  </div>
-                ))}
-                <div style={{ marginBottom: 20 }}>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: sub,
-                      marginBottom: 5,
-                    }}
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    value={form.message}
-                    onChange={update("message")}
-                    rows={4}
-                    placeholder="Describe your issue..."
-                    style={{ ...inpStyle, resize: "vertical" }}
-                  />
+            <div style={{ background: dark ? "rgba(13,148,136,.07)" : "#fff", padding: "2rem", borderRadius: 18, border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}` }}>
+              <h3 style={{ fontWeight: 800, fontSize: 20, color: txt, marginBottom: 20 }}>Send a Message</h3>
+              {[["name","Name","text","Your name"],["email","Email","email","you@company.com"],["subject","Subject","text","How can we help?"]].map(([k,l,t,ph]) => (
+                <div key={k} style={{ marginBottom: 14 }}>
+                  <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: sub, marginBottom: 5 }}>{l}</label>
+                  <input value={form[k]} onChange={update(k)} placeholder={ph} type={t} style={inpStyle} />
                 </div>
-                <button
-                  type="submit"
-                  style={{
-                    width: "100%",
-                    padding: "13px",
-                    borderRadius: 11,
-                    background: `linear-gradient(135deg,${C.teal},${C.dark})`,
-                    color: "#fff",
-                    fontWeight: 700,
-                    fontSize: 15,
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {isLoading? "Sending...": "Send Message"}
-                </button>
-              </form>
+              ))}
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: sub, marginBottom: 5 }}>Message</label>
+                <textarea value={form.message} onChange={update("message")} rows={4} placeholder="Describe your issue..." style={{ ...inpStyle, resize: "vertical" }} />
+              </div>
+              <button
+                onClick={() => { if (form.name && form.email) setSent(true); }}
+                style={{ width: "100%", padding: "13px", borderRadius: 11, background: `linear-gradient(135deg,${C.teal},${C.dark})`, color: "#fff", fontWeight: 700, fontSize: 15, border: "none", cursor: "pointer" }}>
+                Send Message
+              </button>
             </div>
           )}
-        </div>{" "}
-        {/* end grid */}
+
+        </div>
       </Section>
     </Layout>
   );
 }
-
 // ─── Help Center ─────────────────────────────────────────────────────────────
 export function HelpCenterPage() {
   const { dark } = useTheme();
