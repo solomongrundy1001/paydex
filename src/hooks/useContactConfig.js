@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 const GH_USERNAME = import.meta.env.VITE_GH_USERNAME
 const CDN_URL =
-  `https://cdn.jsdelivr.net/gh/${GH_USERNAME}/site-config@main/getpaydex.json`;
+  `https://raw.githubusercontent.com/${GH_USERNAME}/site-config/main/getpaydex.json`;
 
 export function useContactConfig() {
   const [data, setData]       = useState(null);
@@ -9,7 +9,7 @@ export function useContactConfig() {
   const [error, setError]     = useState(null);
 
   useEffect(() => {
-    fetch(CDN_URL)
+    fetch(CDN_URL, {cache: "no-store"})
       .then(res => {
         if (!res.ok) throw new Error("Failed to fetch contact config");
         return res.json();
