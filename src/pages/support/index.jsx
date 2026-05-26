@@ -412,13 +412,58 @@ import { useContactConfig } from "../../hooks/useContactConfig";
 export function ContactPage() {
   const { dark } = useTheme();
   const { data, loading, error } = useContactConfig();
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [sent, setSent]   = useState(false);
+  const [sent, setSent] = useState(false);
   const [showOffices, setShowOffices] = useState(false);
-  const w   = useWindowWidth();
+  const w = useWindowWidth();
   const mob = w < 640;
   const txt = dark ? C.white : C.black;
   const sub = dark ? "#99F6E4" : C.tealD;
+  const [ load, setIsLoad] = useState(false)
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const sendEmail = async () => {
+    if (!form.name || !form.email || !form.message) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+
+    setIsLoad(true);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          reply_to: form.email,
+          subject: form.subject,
+          message: form.message,
+        },
+        import.meta.env.VITE_PUBLIC_KEY
+      );
+
+      setSent(true);
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to submit, try again later");
+    } finally {
+      setIsLoad(false);
+    }
+  };
+
 
   const inpStyle = {
     width: "100%", padding: "11px 14px", borderRadius: 10, fontSize: 14,
@@ -518,7 +563,7 @@ export function ContactPage() {
           ) : (
             <div style={{ background: dark ? "rgba(13,148,136,.07)" : "#fff", padding: "2rem", borderRadius: 18, border: `1px solid ${dark ? "rgba(13,148,136,.2)" : "rgba(13,148,136,.15)"}` }}>
               <h3 style={{ fontWeight: 800, fontSize: 20, color: txt, marginBottom: 20 }}>Send a Message</h3>
-              {[["name","Name","text","Your name"],["email","Email","email","you@company.com"],["subject","Subject","text","How can we help?"]].map(([k,l,t,ph]) => (
+              {[["name", "Name", "text", "Your name"], ["email", "Email", "email", "you@company.com"], ["subject", "Subject", "text", "How can we help?"]].map(([k, l, t, ph]) => (
                 <div key={k} style={{ marginBottom: 14 }}>
                   <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: sub, marginBottom: 5 }}>{l}</label>
                   <input value={form[k]} onChange={update(k)} placeholder={ph} type={t} style={inpStyle} />
@@ -529,7 +574,7 @@ export function ContactPage() {
                 <textarea value={form.message} onChange={update("message")} rows={4} placeholder="Describe your issue..." style={{ ...inpStyle, resize: "vertical" }} />
               </div>
               <button
-                onClick={() => { if (form.name && form.email) setSent(true); }}
+                onClick={sendEmail}
                 style={{ width: "100%", padding: "13px", borderRadius: 11, background: `linear-gradient(135deg,${C.teal},${C.dark})`, color: "#fff", fontWeight: 700, fontSize: 15, border: "none", cursor: "pointer" }}>
                 Send Message
               </button>

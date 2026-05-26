@@ -16,12 +16,12 @@ export function LeadershipPage() {
 
   const team = [
     {
-      name: "Michael Carter",
+      name: "Julian Sawyer",
       role: "CEO & Co-Founder",
       location: "Iowa, USA",
       bio: "Leads product vision and global expansion. Background in building scalable payment infrastructure and cross-border systems.",
       image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces",
+        "https://res.cloudinary.com/db2gycegs/image/upload/v1779434893/WhatsApp_Image_2026-05-21_at_7.08.34_PM_jyqmty.jpg",
     },
     {
       name: "Elena Kovacs",
@@ -70,6 +70,14 @@ export function LeadershipPage() {
       bio: "Leads global talent acquisition and people strategy, focusing on building high-performing distributed teams across engineering, operations, and customer success.",
       image:
         "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&h=400&fit=crop&crop=faces",
+    },
+    {
+      name: "Natasha Green",
+      role: "Human Resource Associate",
+      location: "Iowa, USA",
+      bio: "Supports talent acquisition and employee engagement initiatives, helping build efficient teams and maintain a positive workplace culture.",
+      image:
+        "https://res.cloudinary.com/db2gycegs/image/upload/v1779780830/assitant_HR_vduifq.jpg",
     },
   ];
 
